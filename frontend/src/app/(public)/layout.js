@@ -1,4 +1,8 @@
+"use client"
+
 import Navbar from "../../../components/common/Navbar"
+import { Gift } from "lucide-react"
+import Link from "next/link"
 
 export default function PublicLayout({ children }) {
   return (
@@ -19,6 +23,8 @@ export default function PublicLayout({ children }) {
           </div>
         </div>
       </footer>
+
+    
     </div>
   )
 }

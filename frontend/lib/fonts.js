@@ -5,3 +5,12 @@ export const kaiseiTokumin = Kaisei_Tokumin({
   subsets: ["latin"],
   display: "swap",
 })
+
+
+
+export const kaiseiTokuminBold = Kaisei_Tokumin({
+  weight: ["800"],
+  subsets: ["latin"],
+  display: "swap",
+})
+
