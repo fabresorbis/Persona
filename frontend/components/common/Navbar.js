@@ -39,6 +39,7 @@ function OfferBanner() {
     <div className="w-full bg-[#d01f1f] text-black text-xs py-1 overflow-hidden">
       <div className="relative h-5 flex items-center justify-center">
         <AnimatePresence mode="wait">
+
           <motion.div
             key={messages[index].id}
             initial={{ x: "100%" }}
@@ -69,6 +70,7 @@ export default function Navbar() {
 
   return (
     <header className="w-full sticky top-0 z-50">
+      
       <OfferBanner />
 
       <div className="w-full bg-white ">
