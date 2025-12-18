@@ -115,6 +115,8 @@ export default function Navbar() {
               </Link>
             </div>
 
+
+
             {/* Menu Button (mobile + tablet) */}
             <button
               onClick={() => setOpen(true)}
