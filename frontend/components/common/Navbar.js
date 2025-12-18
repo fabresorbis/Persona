@@ -57,10 +57,11 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white">
       <OfferBanner />
 
-      <div className="border-b">
+      {/* MAIN NAVBAR */}
+      <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
 
-          {/* Desktop Nav (lg+) */}
+          {/* Desktop Nav */}
           <nav className="hidden lg:flex gap-8 text-sm text-gray-700">
             <Link href="/" className="hover:text-black">Home</Link>
             <Link href="/trending" className="hover:text-black">Trending</Link>
@@ -91,8 +92,8 @@ export default function Navbar() {
               </span>
             </div>
 
-            {/* Cart + Profile (sm+) */}
-            <div className="hidden sm:flex items-center gap-4">
+            {/* Cart + Profile */}
+            <div className="flex items-center gap-3">
               <Link
                 href="/cart"
                 className="relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 transition"
@@ -103,24 +104,22 @@ export default function Navbar() {
                 </span>
               </Link>
 
-              <Link href='/admin/dashboard' className="flex items-center gap-2 cursor-pointer">
-                <span className="text-sm text-gray-700">Ezra</span>
+              <Link href="/admin/dashboard" className="flex items-center gap-2">
+                <span className="hidden sm:block text-sm text-gray-700">Ezra</span>
                 <Image
                   src="https://img.freepik.com/free-photo/front-view-business-woman-suit_23-2148603018.jpg"
                   alt="User"
-                  width={34}
-                  height={34}
-                  className="rounded-full object-cover"
+                  width={30}
+                  height={30}
+                  className="rounded-full object-cover sm:w-[34px] sm:h-[34px]"
                 />
               </Link>
             </div>
 
-
-
-            {/* Menu Button (mobile + tablet) */}
+            {/* Menu Button */}
             <button
               onClick={() => setOpen(true)}
-              className="lg:hidden flex items-center justify-center w-9 h-9  "
+              className="lg:hidden flex items-center justify-center w-9 h-9"
             >
               ☰
             </button>
@@ -128,7 +127,21 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* RIGHT SLIDE DRAWER */}
+      {/* MOBILE SEARCH (ONLY MOBILE) */}
+      <div className="block lg:hidden border-b  px-4 py-3 bg-white">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search products"
+            className="w-full h-10 rounded-md border border-amber-400 pl-10 pr-3 text-sm focus:outline-none"
+          />
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+            ⌕
+          </span>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {open && (
           <>
@@ -153,12 +166,6 @@ export default function Navbar() {
               </div>
 
               <div className="p-6 space-y-4 text-sm">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="w-full h-10 rounded-md border px-3 text-sm"
-                />
-
                 <Link href="/" onClick={() => setOpen(false)} className="block">Home</Link>
                 <Link href="/trending" onClick={() => setOpen(false)} className="block">Trending</Link>
                 <Link href="/about" onClick={() => setOpen(false)} className="block">About</Link>
