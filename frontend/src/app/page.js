@@ -12,7 +12,7 @@ export default function Home() {
     <div className="w-full min-h-screen flex flex-col bg-[#d01f1f]">
       <Navbar />
 
-      <main className="w-full relative h-[40vh]">
+      <main className="w-full relative h-[30vh] lg:h-[45vh]">
         <Image
           src="/images/banner1.jpg"
           alt="Persona Banner"

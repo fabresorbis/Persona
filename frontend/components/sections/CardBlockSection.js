@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion"
 import Card from "../common/Card"
+import { ShoppingCart } from "lucide-react"
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,14 +30,14 @@ const itemVariants = {
 
 export default function CardBlockSection({ heading, items }) {
   return (
-    <section className="w-full py-10 bg-white overflow-hidden">
+    <section className="w-full py-7 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex justify-center mb-12"
+          className="flex justify-center mb-10"
         >
           <span className="px-8 py-2 bg-orange-400 text-white text-sm font-medium rounded">
             {heading}
@@ -47,7 +49,7 @@ export default function CardBlockSection({ heading, items }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8"
         >
           {items.map((item, index) => (
             <motion.div key={index} variants={itemVariants}>
