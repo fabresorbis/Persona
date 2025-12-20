@@ -1,51 +1,62 @@
 "use client"
 
-import { useState } from "react"
-
-export default function AdminOrdersPage() {
-  const [orders] = useState([
-    {
-      id: "ORD-1001",
-      user: "John Doe",
-      product: "Custom Printed T-Shirt",
-      address: "221B Baker Street, London, UK",
-      amount: 29.99,
-    },
-    {
-      id: "ORD-1002",
-      user: "Emma Watson",
-      product: "Photo Mug",
-      address: "12 Oxford Road, Manchester, UK",
-      amount: 14.5,
-    },
-  ])
+export default function ResponsiveTable() {
+  const rows = [
+    { id: 1, user: "John Doe", product: "Custom T-Shirt", amount: "29.99", status: "Paid" },
+    { id: 2, user: "Emma Watson", product: "Photo Mug", amount: "14.50", status: "Pending" },
+    { id: 3, user: "Alex Smith", product: "Hoodie", amount: "49.00", status: "Delivered" },
+  ]
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Manage Orders</h1>
-        <p className="text-gray-600">View and manage customer orders</p>
-      </div>
+    <div className="bg-white p-2 sm:p-6">
+      <h2 className="text-base sm:text-lg font-semibold mb-4">
+        Recent Orders
+      </h2>
 
-      <div className="bg-white border rounded-lg overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-gray-50 text-left">
-            <tr>
-              <th className="px-4 py-3">Order ID</th>
-              <th className="px-4 py-3">Customer</th>
-              <th className="px-4 py-3">Product</th>
-              <th className="px-4 py-3">Address</th>
-              <th className="px-4 py-3">Paid Amount</th>
+      <div className="overflow-x-auto">
+        <table className="w-full  border-collapse text-sm">
+          <thead>
+            <tr className="border-b bg-gray-50">
+              <th className="text-left px-2 sm:px-3 py-2 font-medium text-gray-600">
+                User
+              </th>
+              <th className="text-left px-2 sm:px-3 py-2 font-medium text-gray-600">
+                Product
+              </th>
+              <th className="text-left px-2 sm:px-3 py-2 font-medium text-gray-600">
+                Amount
+              </th>
+              <th className="text-left px-2 sm:px-3 py-2 font-medium text-gray-600">
+                Status
+              </th>
             </tr>
           </thead>
+
           <tbody>
-            {orders.map(order => (
-              <tr key={order.id} className="border-t">
-                <td className="px-4 py-3 font-mono">{order.id}</td>
-                <td className="px-4 py-3">{order.user}</td>
-                <td className="px-4 py-3">{order.product}</td>
-                <td className="px-4 py-3 max-w-xs truncate">{order.address}</td>
-                <td className="px-4 py-3 font-medium">£{order.amount}</td>
+            {rows.map((row) => (
+              <tr key={row.id} className="border-b last:border-b-0">
+                <td className="px-2 sm:px-3 py-2 whitespace-nowrap">
+                  {row.user}
+                </td>
+                <td className="px-2 sm:px-3 py-2 whitespace-nowrap">
+                  {row.product}
+                </td>
+                <td className="px-2 sm:px-3 py-2">
+                  £{row.amount}
+                </td>
+                <td className="px-2 sm:px-3 py-2">
+                  <span
+                    className={`font-medium ${
+                      row.status === "Paid"
+                        ? "text-green-600"
+                        : row.status === "Pending"
+                        ? "text-yellow-600"
+                        : "text-blue-600"
+                    }`}
+                  >
+                    {row.status}
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
