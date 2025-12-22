@@ -14,7 +14,7 @@ export default function Home() {
 
       <main className="w-full relative h-[30vh] lg:h-[45vh]">
         <Image
-          src="/images/banner1.jpg"
+          src="/images/banner2.jpg"
           alt="Persona Banner"
           fill
           priority
