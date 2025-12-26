@@ -153,6 +153,7 @@ function DiscountBanner() {
         }
       })
   }, [])
+  
 
   const persist = async (nextEnabled, nextMessages) => {
     setSaving(true)
