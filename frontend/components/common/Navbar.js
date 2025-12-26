@@ -19,7 +19,7 @@ function OfferBanner() {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    fetch("http://143.244.128.171:4000/api/home-content")
+    fetch("https://persona-backend-2fvi.onrender.com/api/home-content")
       .then((res) => res.json())
       .then((data) => {
         if (data?.discountBanner) {

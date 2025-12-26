@@ -93,7 +93,7 @@ const submit = async () => {
   try {
     setLoading(true)
 
-    await fetch("http://143.244.128.171:4000/api/products", {
+    await fetch("https://persona-backend-2fvi.onrender.com/api/products", {
       method: "POST",
       body: formData
     })

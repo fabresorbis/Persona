@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation"
 import { Package, Tag, Palette } from "lucide-react"
 import ProductLivePreview from "../../../../../components/product/ProductLivePreview"
 
-const API_BASE = "http://143.244.128.171:4000/api/products"
+const API_BASE = "https://persona-backend-2fvi.onrender.com/api/products"
 
 export default function EditProductPage() {
   const { id } = useParams()

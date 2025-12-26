@@ -14,7 +14,7 @@ import {
 import Link from "next/link"
 import Image from "next/image"
 
-const API_BASE = "http://143.244.128.171:4000/api/products"
+const API_BASE = "https://persona-backend-2fvi.onrender.com/api/products"
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([])
