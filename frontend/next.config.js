@@ -9,6 +9,10 @@ const nextConfig = {
       { protocol: "https", hostname: "m.media-amazon.com" },
       { protocol: "https", hostname: "images.pexels.com" },
       { protocol: "https", hostname: "img.freepik.com" },
+      { protocol: "https", hostname: "res.cloudinary.com" },
+      { protocol: "https", hostname: "picsum.photos" }
+
+      
     ],
   },
 }

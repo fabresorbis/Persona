@@ -14,15 +14,40 @@ const messages = [
 ]
 
 function OfferBanner() {
+  const [messages, setMessages] = useState([])
+  const [enabled, setEnabled] = useState(true)
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
+    fetch("http://localhost:4000/api/home-content")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.discountBanner) {
+          setEnabled(data.discountBanner.enabled)
+          setMessages(
+            (data.discountBanner.messages || []).map((msg, i) => ({
+              id: i,
+              content: msg,
+              link: null
+            }))
+          )
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    if (!enabled || messages.length === 0) return
+
     const timer = setInterval(
       () => setIndex((p) => (p + 1) % messages.length),
       4000
     )
+
     return () => clearInterval(timer)
-  }, [])
+  }, [enabled, messages])
+
+  if (!enabled || messages.length === 0) return null
 
   return (
     <div className="w-full bg-[#d01f1f] text-xs text-white py-1 overflow-hidden">
@@ -37,7 +62,10 @@ function OfferBanner() {
             className="absolute whitespace-nowrap font-medium"
           >
             {messages[index].link ? (
-              <Link href={messages[index].link} className="underline font-semibold">
+              <Link
+                href={messages[index].link}
+                className="underline font-semibold"
+              >
                 {messages[index].content}
               </Link>
             ) : (
@@ -49,6 +77,7 @@ function OfferBanner() {
     </div>
   )
 }
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)

@@ -1,8 +1,20 @@
 import express from "express"
-import { getProducts, createProduct } from "../controllers/product.controller.js"
+import { productUpload } from "../middlewares/upload.js"
+
+import {
+  createProduct,
+  getAllProducts,
+  getProductById,
+  updateProduct,
+  deactivateProduct
+} from "../controllers/product.controller.js"
+
 const router = express.Router()
 
-router.get("/", getProducts)
-router.post("/", createProduct)
+router.get("/", getAllProducts)
+router.get("/:id", getProductById)
+router.post("/", productUpload.array("images", 5), createProduct)
+router.put("/:id", productUpload.array("images", 5), updateProduct)
+router.patch("/:id/deactivate", deactivateProduct)
 
 export default router
