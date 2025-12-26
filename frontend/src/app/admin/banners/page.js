@@ -43,7 +43,7 @@ function HomeBanner() {
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/home-content")
+    fetch("http://143.244.128.171:4000/api/home-content")
       .then(res => res.json())
       .then(data => {
         if (data?.homeBanner?.imageUrl) {
@@ -77,7 +77,7 @@ function HomeBanner() {
     const formData = new FormData()
     formData.append("bannerImage", file)
 
-    const res = await fetch("http://localhost:4000/api/home-content/home-banner", {
+    const res = await fetch("http://143.244.128.171:4000/api/home-content/home-banner", {
       method: "PUT",
       body: formData
     })
@@ -144,7 +144,7 @@ function DiscountBanner() {
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/home-content")
+    fetch("http://143.244.128.171:4000/api/home-content")
       .then(res => res.json())
       .then(data => {
         if (data?.discountBanner) {
@@ -156,7 +156,7 @@ function DiscountBanner() {
 
   const persist = async (nextEnabled, nextMessages) => {
     setSaving(true)
-    await fetch("http://localhost:4000/api/home-content/discount-banner", {
+    await fetch("http://143.244.128.171:4000/api/home-content/discount-banner", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

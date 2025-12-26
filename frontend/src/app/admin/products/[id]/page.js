@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation"
 import { Package, Tag, Palette } from "lucide-react"
 import ProductLivePreview from "../../../../../components/product/ProductLivePreview"
 
-const API_BASE = "http://localhost:4000/api/products"
+const API_BASE = "http://143.244.128.171:4000/api/products"
 
 export default function EditProductPage() {
   const { id } = useParams()
