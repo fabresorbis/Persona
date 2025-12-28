@@ -1,5 +1,5 @@
 import "./globals.css"
-import { kaiseiTokumin } from "../../lib/fonts"
+import { kaiseiTokumin } from "@/lib/fonts"
 
 export const metadata = {
   title: "Persona - Custom Merchandise",
@@ -10,6 +10,8 @@ export const metadata = {
     apple: "/icons/logo.png",
   },
 }
+
+console.log(process.env.NODE_ENV)
 
 export default function RootLayout({ children }) {
   return (

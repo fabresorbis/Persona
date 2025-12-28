@@ -3,7 +3,9 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Palette, Upload, X } from "lucide-react"
-import ProductLivePreview from "../../../../../components/product/ProductLivePreview"
+
+import ProductLivePreview from "@/components/product/ProductLivePreview"
+import { createProduct } from "@/services/product.service"
 
 const PRINT_AREA_PRESETS = {
   tshirt: [
@@ -64,8 +66,6 @@ export default function CreateProduct() {
 
 const submit = async () => {
   if (!name || !itemType || !category || !basePrice) return
-  console.log(photos)
-
 
   const data = {
     name,
@@ -86,23 +86,19 @@ const submit = async () => {
     })
   }
 
-  const formData = new FormData()
-  formData.append("data", JSON.stringify(data))
-  photos.forEach(file => formData.append("images", file))
-
   try {
     setLoading(true)
 
-    await fetch("https://persona-backend-2fvi.onrender.com/api/products", {
-      method: "POST",
-      body: formData
-    })
+    await createProduct(data, photos)
 
     router.push("/admin/products")
+  } catch (err) {
+    console.error(err.message)
   } finally {
     setLoading(false)
   }
 }
+
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">

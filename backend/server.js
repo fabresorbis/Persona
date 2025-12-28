@@ -3,6 +3,7 @@ import cors from "cors"
 import paymentRoutes from "./src/routes/payment.routes.js"
 import productRoutes from "./src/routes/product.routes.js"
 import homeBannerRoutes from "./src/routes/homeContent.routes.js"
+import couponRoutes from "./src/routes/coupon.routes.js"
 import { connectDB } from "./src/config/db.js"
 
 const app = express()
@@ -23,6 +24,8 @@ connectDB()
 app.use("/api/payment", paymentRoutes)
 app.use("/api/products", productRoutes)
 app.use("/api/home-content", homeBannerRoutes)
+app.use("/api/coupon", couponRoutes)
+
 
 app.get("/", (req, res) => {
   res.json({ success: true, message: "API running" })
