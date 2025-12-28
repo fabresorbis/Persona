@@ -1,6 +1,6 @@
 "use client"
 
-import TshirtStudio from "@/../components/TshirtStudio"
+import TshirtStudio from "@/components/TshirtStudio"
 
 export default function StudioPage() {
   return (
