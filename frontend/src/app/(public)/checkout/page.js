@@ -136,6 +136,9 @@ export default function CheckoutPage() {
           </div>
         ))}
 
+
+
+
         <div className="border-t pt-4 space-y-2">
           <div className="flex justify-between">
             <span>Subtotal</span>
@@ -148,6 +151,8 @@ export default function CheckoutPage() {
               <span>-${discountAmount}</span>
             </div>
           )}
+
+          
 
           {deliveryCharge > 0 && (
             <div className="flex justify-between text-gray-600">
