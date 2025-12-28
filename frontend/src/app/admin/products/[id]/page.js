@@ -4,9 +4,10 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { useParams, useRouter } from "next/navigation"
 import { Package, Tag, Palette } from "lucide-react"
-import ProductLivePreview from "../../../../../components/product/ProductLivePreview"
 
-const API_BASE = "http://143.244.128.171:4000/api/products"
+import ProductLivePreview from "@/components/product/ProductLivePreview"
+
+const API_BASE = `${process.env.NEXT_PUBLIC_API_URL}/products`
 
 export default function EditProductPage() {
   const { id } = useParams()

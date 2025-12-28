@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Footer() {
   return (
@@ -39,14 +40,16 @@ export default function Footer() {
             Design prototype by Fosoft
           </span>
 
-          <div className="flex items-center gap-3">
-            <span className="text-blue-400 font-semibold text-sm">
-              stripe
-            </span>
-            <span className="text-blue-500 font-semibold text-sm">
-              VISA
-            </span>
-          </div>
+        <Link href="https://stripe.com" className="flex items-center gap-3 text-sm text-gray-600">
+  <span>Powered by</span>
+  <Image
+    src="/images/stripe.png"
+    width={36}
+    height={24}
+    alt="Stripe"
+  />
+</Link>
+
         </div>
       </div>
     </footer>

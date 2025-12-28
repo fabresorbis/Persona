@@ -3,13 +3,14 @@ import cors from "cors"
 import paymentRoutes from "./src/routes/payment.routes.js"
 import productRoutes from "./src/routes/product.routes.js"
 import homeBannerRoutes from "./src/routes/homeContent.routes.js"
+import couponRoutes from "./src/routes/coupon.routes.js"
 import { connectDB } from "./src/config/db.js"
 
 const app = express()
 
 app.use(
   cors({
-    origin: ["http://127.0.0.1:5173", "http://localhost:5173"],
+    origin: ["http://127.0.0.1:5173", "http://localhost:5173", "https://persona-gifts.vercel.app"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
@@ -23,6 +24,8 @@ connectDB()
 app.use("/api/payment", paymentRoutes)
 app.use("/api/products", productRoutes)
 app.use("/api/home-content", homeBannerRoutes)
+app.use("/api/coupon", couponRoutes)
+
 
 app.get("/", (req, res) => {
   res.json({ success: true, message: "API running" })

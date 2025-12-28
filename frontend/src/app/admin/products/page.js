@@ -14,7 +14,13 @@ import {
 import Link from "next/link"
 import Image from "next/image"
 
-const API_BASE = "http://143.244.128.171:4000/api/products"
+import {
+  getAllProducts,
+  deactivateProduct as deactivateProductApi
+} from "@/services/product.service"
+
+
+
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([])
@@ -23,35 +29,37 @@ export default function AdminProductsPage() {
   const [loading, setLoading] = useState(true)
   const [openMenuId, setOpenMenuId] = useState(null)
 
-  const fetchProducts = async (pageNumber = 1) => {
-    try {
-      setLoading(true)
-      const { data } = await axios.get(API_BASE, {
-        params: {
-          page: pageNumber,
-          limit: 13
-        }
-      })
+const fetchProducts = async (pageNumber = 1) => {
+  try {
+    setLoading(true)
 
-      setProducts(data.products)
-      setPage(data.page)
-      setTotalPages(data.totalPages)
-    } catch (err) {
-      console.error("Failed to fetch products", err)
-    } finally {
-      setLoading(false)
-    }
-  }
+    const data = await getAllProducts({
+      page: pageNumber,
+      limit: 13
+    })
 
-  const deactivateProduct = async (id) => {
-    try {
-      await axios.patch(`${API_BASE}/${id}/deactivate`)
-      setOpenMenuId(null)
-      fetchProducts(page)
-    } catch (err) {
-      console.error("Failed to deactivate product", err)
-    }
+    setProducts(Array.isArray(data?.products) ? data.products : [])
+    setPage(data?.page || 1)
+    setTotalPages(data?.totalPages || 1)
+  } catch (err) {
+    console.error(err.message)
+    setProducts([]) // 🔒 guarantee array
+  } finally {
+    setLoading(false)
   }
+}
+
+
+const deactivateProduct = async (id) => {
+  try {
+    await deactivateProductApi(id)
+    setOpenMenuId(null)
+    fetchProducts(page)
+  } catch (err) {
+    console.error(err.message)
+  }
+}
+
 
   useEffect(() => {
     fetchProducts(1)

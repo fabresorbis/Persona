@@ -2,25 +2,26 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import Navbar from "../../components/common/Navbar"
-import CardBlockSection from "../../components/sections/CardBlockSection"
-import Footer from "../../components/common/Footer"
+import Navbar from "@/components/common/Navbar"
+import CardBlockSection from "@/components/sections/CardBlockSection"
+import Footer from "@/components/common/Footer"
 import Link from "next/link"
 import { Gift } from "lucide-react"
+import { getBanner } from "@/services/home-content.service"
 
 export default function Home() {
   const [bannerUrl, setBannerUrl] = useState(null)
 
-  useEffect(() => {
-    fetch("http://143.244.128.171:4000/api/home-content")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.homeBanner?.imageUrl) {
-          setBannerUrl(data.homeBanner.imageUrl)
-        }
-      })
-      .catch(() => {})
-  }, [])
+useEffect(() => {
+  getBanner()
+   
+    .then((data) => {
+      if (data?.homeBanner?.imageUrl) {
+        setBannerUrl(data.homeBanner.imageUrl)
+      }
+    })
+    .catch(() => {})
+}, [])
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-[#d01f1f]">

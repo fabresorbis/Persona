@@ -53,6 +53,25 @@ export const updateProduct = async (req, res) => {
   }
 }
 
+export const getProductsByIds = async (req, res) => {
+  const { productIds } = req.body
+
+  if (!Array.isArray(productIds) || !productIds.length) {
+    return res.status(400).json({
+      message: "productIds array is required"
+    })
+  }
+
+  const products = await Product.find({
+    _id: { $in: productIds },
+    active: true
+  }).select(
+    "_id name basePrice images stock variants productType category"
+  )
+
+  res.json(products)
+}
+
 
 export const getAllProducts = async (req, res) => {
   try {
