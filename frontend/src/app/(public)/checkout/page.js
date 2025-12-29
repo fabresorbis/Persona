@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-  import { Suspense } from "react"
-import CheckoutClient from "./CheckoutClient"
-
-export default function Page() {
-  return (
-    <Suspense fallback={null}>
-      <CheckoutClient />
-    </Suspense>
-=======
 "use client"
 
 import { useEffect, useState, useMemo } from "react"
@@ -203,6 +193,5 @@ export default function CheckoutClient() {
         </button>
       </div>
     </div>
->>>>>>> 51b8284d7f9d798a5ab85c6fdc3062c75878517d
   )
 }
