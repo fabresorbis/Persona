@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo } from "react"
 import Image from "next/image"
 import { applyCoupon } from "@/services/checkout.service"
+import { createCheckoutSession } from "@/services/payment.service"
 
 export default function CheckoutClient() {
   const [items, setItems] = useState([])
@@ -63,39 +64,24 @@ export default function CheckoutClient() {
      Backend recalculates everything
   --------------------------------*/
 
-  const handlePlaceOrder = async () => {
-    try {
-      setLoadingPayment(true)
+const handlePlaceOrder = async () => {
+  try {
+    setLoadingPayment(true)
 
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]")
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]")
 
-      const res = await fetch(
-        "http://localhost:4000/api/payment/create-checkout-session",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            mode: "cart",
-            cart,
-            couponCode: coupon || null
-          })
-        }
-      )
+    const data = await createCheckoutSession({
+      mode: "cart",
+      cart,
+      couponCode: coupon || null
+    })
 
-      const data = await res.json()
-
-      if (!res.ok) {
-        alert(data.message || "Payment failed")
-        setLoadingPayment(false)
-        return
-      }
-
-      window.location.href = data.url
-    } catch {
-      alert("Unable to initiate payment")
-      setLoadingPayment(false)
-    }
+    window.location.href = data.url
+  } catch (err) {
+    alert(err.message)
+    setLoadingPayment(false)
   }
+}
 
   return (
     <div className="max-w-6xl mx-auto p-6 grid md:grid-cols-2 gap-10">
