@@ -47,6 +47,7 @@ export default function Footer() {
     width={36}
     height={24}
     alt="Stripe"
+    priority
   />
 </Link>
 
