@@ -1,9 +1,6 @@
 import api from "./axios"
 
-
-export const getBanner = () => {
- 
-
-  return api.get("/home-content")
+export const getBanner = async () => {
+  const response = await api.get("/home-content")
+  return response
 }
-

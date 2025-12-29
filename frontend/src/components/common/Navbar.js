@@ -6,6 +6,7 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { kaiseiTokuminBold } from "@/lib/fonts"
 import { ShoppingCart } from "lucide-react"
+import { getBanner } from "@/services/home-content.service"
 
 const messages = [
   { id: 1, content: "Christmas offer is now available 🎁", link: null },
@@ -13,17 +14,19 @@ const messages = [
   { id: 3, content: "Limited-time festive discounts 🎄", link: null },
 ]
 
+
 function OfferBanner() {
   const [messages, setMessages] = useState([])
-  const [enabled, setEnabled] = useState(true)
+  const [enabled, setEnabled] = useState(false)
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    fetch("https://persona-backend-2fvi.onrender.com/api/home-content")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.discountBanner) {
-          setEnabled(data.discountBanner.enabled)
+    const load = async () => {
+      try {
+        const data = await getBanner()
+        console.log(data)
+        if (data?.discountBanner?.enabled) {
+          setEnabled(true)
           setMessages(
             (data.discountBanner.messages || []).map((msg, i) => ({
               id: i,
@@ -32,18 +35,18 @@ function OfferBanner() {
             }))
           )
         }
-      })
-      .catch(() => {})
+      } catch {}
+    }
+
+    load()
   }, [])
 
   useEffect(() => {
     if (!enabled || messages.length === 0) return
-
     const timer = setInterval(
       () => setIndex((p) => (p + 1) % messages.length),
       4000
     )
-
     return () => clearInterval(timer)
   }, [enabled, messages])
 
@@ -62,10 +65,7 @@ function OfferBanner() {
             className="absolute whitespace-nowrap font-medium"
           >
             {messages[index].link ? (
-              <Link
-                href={messages[index].link}
-                className="underline font-semibold"
-              >
+              <Link href={messages[index].link} className="underline font-semibold">
                 {messages[index].content}
               </Link>
             ) : (
